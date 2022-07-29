@@ -8,7 +8,7 @@ import 'package:native_notify/native_notify.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  WidgetsFlutterBinding.ensureInitialized();
+  //WidgetsFlutterBinding.ensureInitialized();
   NativeNotify.initialize(
       1220,
       '1Exwx7C8rNyFewTJYYbx06',
