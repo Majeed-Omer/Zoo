@@ -8,7 +8,7 @@ import 'package:zoo/Screens/register_screen.dart';
 import 'package:zoo/Services/auth_services.dart';
 import 'package:zoo/Services/globals.dart';
 import 'package:zoo/widgets/rounded_button.dart';
-import 'package:zoo/wrapper.dart';
+import 'package:zoo/widgets/wrapper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zoo/Services/Services_crud.dart';
 
-import '../Ticket.dart';
+import '../Models/Ticket.dart';
 
 class ticket_sell extends StatefulWidget {
   ticket_sell() : super();

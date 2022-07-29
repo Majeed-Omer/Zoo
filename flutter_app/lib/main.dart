@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zoo/Screens/register_screen.dart';
-import 'package:zoo/wrapper.dart';
+import 'package:zoo/widgets/wrapper.dart';
 import 'package:native_notify/native_notify.dart';
 
 Future<void> main() async {
