@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:flutter_session/flutter_session.dart';
 import 'package:zoo/Screens/register_screen.dart';
 
 class Account extends StatefulWidget {
@@ -32,7 +31,6 @@ class _AccountState extends State<Account> {
             IconButton(
               icon: Icon(Icons.logout),
               onPressed: () async {
-                //await FlutterSession().set('token', '');
                 SharedPreferences preferences = await SharedPreferences.getInstance();
                 preferences.setBool("isLoggedIn", false);
                 Navigator.pushReplacement(
