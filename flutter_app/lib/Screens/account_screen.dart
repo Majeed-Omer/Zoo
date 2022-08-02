@@ -3,7 +3,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zoo/Screens/register_screen.dart';
 
 class Account extends StatefulWidget {
-  const Account({Key? key}) : super(key: key);
+  final String name;
+  final String email;
+  final image;
+
+  Account({required this.name, required this.email, required this.image});  
   @override
   _AccountState createState() => _AccountState();
 }
@@ -46,13 +50,16 @@ class _AccountState extends State<Account> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage("assets/person.jpg"),
+               CircleAvatar(
+                backgroundImage: NetworkImage(widget.image),
                 radius: 50,
               ),
               const SizedBox(
                 height: 10,
               ),
+              Text(widget.name, style: TextStyle(fontSize: 20),),
+              SizedBox(height: 10,),
+              Text(widget.email, style: TextStyle(fontSize: 15),),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text(
                   " My Tickets",

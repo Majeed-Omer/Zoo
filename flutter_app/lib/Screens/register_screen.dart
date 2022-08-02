@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-//import 'package:flutter_session/flutter_session.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zoo/Screens/login_screen.dart';
@@ -23,7 +22,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _email = '';
   String _password = '';
   String _name = '';
-  bool _isLoggedIn = false;
   Map _userObj = {};
 
   createAccountPressed() async {
@@ -40,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => Wrapper(),
+              builder: (BuildContext context) => Wrapper(email: _userObj["email"], name: _userObj["name"], image: '',),
             ));
       } else {
         errorSnackBar(context, responseMap.values.first[0]);
@@ -52,120 +50,159 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        centerTitle: true,
-        elevation: 0,
-        title: const Text(
-          'Registration',
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+    return ScreenUtilInit(
+      builder: (BuildContext context, Widget? child) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.green,
+          centerTitle: true,
+          elevation: 0,
+          title: Text(
+            'Registration',
+            style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
+          ),
+          toolbarHeight: (h + w) / 15,
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                  
-                ),
-                TextField(
-                  decoration: const InputDecoration(
-                    hintText: 'Name',
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                        hintText: 'Name',
+                        hintStyle: TextStyle(fontSize: 15.sp)),
+                    onChanged: (value) {
+                      _name = value;
+                    },
                   ),
-                  onChanged: (value) {
-                    _name = value;
-                  },
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                  decoration: const InputDecoration(
-                    hintText: 'Email',
+                  const SizedBox(
+                    height: 30,
                   ),
-                  onChanged: (value) {
-                    _email = value;
-                  },
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    hintText: 'Password',
+                  TextField(
+                    decoration: InputDecoration(
+                        hintText: 'Email',
+                        hintStyle: TextStyle(fontSize: 15.sp)),
+                    onChanged: (value) {
+                      _email = value;
+                    },
                   ),
-                  onChanged: (value) {
-                    _password = value;
-                  },
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                RoundedButton(
-                  btnText: 'Create Account',
-                  onBtnPressed: () => createAccountPressed(),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-        
-                Text("-----------------------------OR--------------------------------"),
-        
-                SizedBox(height: 20,),
-        
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(child: Image.asset('assets/facebook_image.jpg', width: 30, height: 30), onTap: (){FacebookAuth.instance.login(
-                      permissions: ["public_profile", "email"]).then((value) {
-                    FacebookAuth.instance.getUserData().then((userData) async {
-                      setState(() {
-                        _isLoggedIn = true;
-                        _userObj = userData;
-        
-                        Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => Wrapper(),
-                        ));
-                         
-                      });
-                    });
-                  });},),
-                    InkWell(child: Image.asset('assets/google_image.png', width: 30, height: 30), onTap: (){print("mom");},),
-                    InkWell(child: Image.asset('assets/Instagram_image.jpg', width: 30, height: 30), onTap: (){print("mom");},),
-                    InkWell(child: Image.asset('assets/twitter_image.png', width: 30, height: 30), onTap: (){print("mom");},),
-                  ],
-                ),
-        
-                SizedBox(height: 40,),
-        
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => const LoginScreen(),
-                        ));
-                  },
-                  child: const Text(
-                    'already have an account',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle: TextStyle(fontSize: 15.sp)),
+                    onChanged: (value) {
+                      _password = value;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  RoundedButton(
+                    btnText: 'Create Account',
+                    onBtnPressed: () => createAccountPressed(),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    "-----------------------------OR--------------------------------",
+                    style: TextStyle(fontSize: 10.sp),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      InkWell(
+                        child: Image.asset('assets/facebook_image.jpg',
+                            width: w / 10, height: h / 10),
+                        onTap: () {
+                          FacebookAuth.instance.login(permissions: [
+                            "public_profile",
+                            "email"
+                          ]).then((value) {
+                            FacebookAuth.instance
+                                .getUserData()
+                                .then((userData) async {
+                              setState(() async {
+                                _userObj = userData;
+                                SharedPreferences preferences = await SharedPreferences.getInstance();
+                                preferences.setBool("isLoggedIn", true);
+                                preferences.setString("name", _userObj["name"]);
+                                preferences.setString("email", _userObj["email"]);
+                                preferences.setString("image", _userObj["picture"]["data"]["url"]);
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) => 
+                                          Wrapper(email: _userObj["email"], name: _userObj["name"], image: _userObj["picture"]["data"]["url"]),
+                                          
+                                    ));
+                              });
+                            });
+                          });
+                        },
+                      ),
+                      InkWell(
+                        child: Image.asset('assets/google_image.png',
+                            width: w / 10, height: h / 10),
+                        onTap: () {
+                          print("mom");
+                        },
+                      ),
+                      InkWell(
+                        child: Image.asset('assets/Instagram_image.jpg',
+                            width: w / 10, height: h / 10),
+                        onTap: () {
+                          print("mom");
+                        },
+                      ),
+                      InkWell(
+                        child: Image.asset('assets/twitter_image.png',
+                            width: w / 10, height: h / 10),
+                        onTap: () {
+                          print("mom");
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const LoginScreen(),
+                          ));
+                    },
+                    child: Text(
+                      'already have an account',
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 20.sp),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
+        ),
       ),
-      
     );
   }
 }

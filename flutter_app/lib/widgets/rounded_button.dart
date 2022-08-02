@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RoundedButton extends StatelessWidget {
   final String btnText;
@@ -9,19 +10,25 @@ class RoundedButton extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 5,
-      color: Colors.green,
-      borderRadius: BorderRadius.circular(30),
-      child: MaterialButton(
-        onPressed: () {
-          onBtnPressed();
-        },
-        minWidth: 320,
-        height: 60,
-        child: Text(
-          btnText,
-          style: const TextStyle(color: Colors.white, fontSize: 20),
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+
+    return ScreenUtilInit(
+      builder: (BuildContext context, Widget? child) =>
+       Material(
+        elevation: 5,
+        color: Colors.green,
+        borderRadius: BorderRadius.circular(30),
+        child: MaterialButton(
+          onPressed: () {
+            onBtnPressed();
+          },
+          minWidth: double.infinity,
+          height: h / 17 + w / 17,
+          child: Text(
+            btnText,
+            style: TextStyle(color: Colors.white, fontSize: 20.sp),
+          ),
         ),
       ),
     );

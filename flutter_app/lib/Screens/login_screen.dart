@@ -31,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => Wrapper(),
-            ));
+              builder: (BuildContext context) => Wrapper(name: '', email: _email, image: '',)),
+            );
       } else {
         errorSnackBar(context, responseMap.values.first);
       }

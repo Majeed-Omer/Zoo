@@ -8,7 +8,10 @@ import 'package:zoo/Screens/account_screen.dart';
 
 class Wrapper extends StatefulWidget {
 
- Map _userObj = {};
+  final String name;
+  final String email;
+  final image;
+  Wrapper({required this.name, required this.email, required this.image}); 
 
   _WrapperState createState() => _WrapperState();
 }
@@ -64,7 +67,7 @@ class _WrapperState extends State<Wrapper> {
           _child = ticket_sell();
           break;
         case 2:
-          _child = Account();
+          _child = Account(name: widget.name, email: widget.email, image: widget.image,);
           break;
       }
       _child = AnimatedSwitcher(

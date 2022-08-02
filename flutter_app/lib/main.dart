@@ -7,8 +7,7 @@ import 'package:native_notify/native_notify.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  //WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(name: "zoo", options: FirebaseOptions(apiKey: '123', appId: '111', messagingSenderId: '333', projectId: '444'));
   NativeNotify.initialize(
       1220,
       '1Exwx7C8rNyFewTJYYbx06',
@@ -16,9 +15,13 @@ Future<void> main() async {
       null);
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var status = preferences.getBool("isLoggedIn") ?? false;
+
+  String? name = preferences.getString("name");
+  String? email = preferences.getString("email");
+  String? image = preferences.getString("image");
   
   runApp(MaterialApp(
-    home: status == true ? Wrapper() : MyApp(),
+    home: status == true ? Wrapper(email: email!, name: name!, image: image) : MyApp(),
     debugShowCheckedModeBanner: false,
   ));
 }
