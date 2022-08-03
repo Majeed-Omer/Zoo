@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zoo/Screens/onBoarding_screen.dart';
 import 'package:zoo/Screens/register_screen.dart';
 import 'package:zoo/widgets/wrapper.dart';
 import 'package:native_notify/native_notify.dart';
@@ -19,15 +20,16 @@ Future<void> main() async {
   String? name = preferences.getString("name");
   String? email = preferences.getString("email");
   String? image = preferences.getString("image");
+
+  final showHome = preferences.getBool('showHome') ?? false;
   
   runApp(MaterialApp(
-    home: status == true ? Wrapper(email: email!, name: name!, image: image) : MyApp(),
+    home: status == true ? Wrapper(email: email!, name: name!, image: image) : showHome ? MyApp() : onBoarding(),
     debugShowCheckedModeBanner: false,
   ));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {  
 
   @override
   State<MyApp> createState() => _MyAppState();

@@ -43,6 +43,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green[500],
@@ -55,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          toolbarHeight: h / 12,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -84,8 +89,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     _password = value;
                   },
                 ),
-                const SizedBox(
-                  height: 30,
+               SizedBox(
+                  height: h * 0.05,
                 ),
                 RoundedButton(
                   btnText: 'LOG IN',
@@ -109,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: TextDecoration.underline,
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
