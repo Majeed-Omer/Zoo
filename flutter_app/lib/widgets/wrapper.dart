@@ -28,6 +28,7 @@ class _WrapperState extends State<Wrapper> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _child,
+      extendBody: true,
       bottomNavigationBar: FluidNavBar(
           icons: [
             FluidNavBarIcon(

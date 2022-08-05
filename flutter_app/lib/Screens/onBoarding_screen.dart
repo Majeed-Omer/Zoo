@@ -39,10 +39,9 @@ class _onBoardingState extends State<onBoarding> {
       bottomSheet: isLastPage
           ? TextButton(
               style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0)),
+                  
                   primary: Colors.white,
-                  backgroundColor: Colors.teal,
+                  backgroundColor: Colors.green,
                   minimumSize: Size.fromHeight(80)),
               onPressed: () async {
                 final preferences = await SharedPreferences.getInstance();
@@ -71,7 +70,7 @@ class _onBoardingState extends State<onBoarding> {
                       effect: WormEffect(
                           spacing: 16,
                           dotColor: Colors.black26,
-                          activeDotColor: Colors.teal),
+                          activeDotColor: Colors.green),
                       onDotClicked: ((index) => controller.animateToPage(index,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut)),

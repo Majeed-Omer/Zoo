@@ -1,4 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'animals_details.dart';
 
@@ -10,7 +12,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final controller = CarouselController();
+  int activateIndex = 0;
+  final sliderImages = [
+    'assets/corn.jpg',
+    'assets/rabbit.jpg',
+    'assets/panda.jpg',
+    'assets/tiger.webp'
+  ];
   Widget itemBuilder(p, n) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -23,12 +35,13 @@ class _HomeState extends State<Home> {
         borderRadius: BorderRadius.circular(18.0),
         child: Container(
           color: Colors.grey[200],
-          child: Column(children: [
+          child: Column(
+            children: [
             Image.asset(
               p,
               fit: BoxFit.fill,
-              width: 150,
-              height: 100,
+              width: w / 2.5,
+              height: h / 5,
             ),
             Text(
               n,
@@ -40,8 +53,31 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget builImage(String sliderImage, int index) => Container(
+        color: Colors.grey,
+        child: Image.asset(
+          sliderImage,
+          fit: BoxFit.fill,
+          width: double.infinity,
+        ),
+      );
+
+      void animateToSlide(int index) => controller.animateToPage(index);
+  Widget buildIndicator() { 
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+    return AnimatedSmoothIndicator(
+        activeIndex: activateIndex,
+        count: sliderImages.length,
+        effect: SwapEffect(dotHeight: (h / 55), dotWidth: (h / 55), activeDotColor: Colors.green),
+        onDotClicked: animateToSlide,
+      );
+  }
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -49,151 +85,162 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: Column(
-        children: [
-         
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Column(
             children: [
-              Text(
-                " Mammals",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              Center(
+                child: Stack(children: [
+                  CarouselSlider.builder(
+                    carouselController: controller,
+                      itemCount: sliderImages.length,
+                      itemBuilder: (context, index, realIndex) {
+                        final sliderImage = sliderImages[index];
+                        return builImage(sliderImage, index);
+                      },
+                      options: CarouselOptions(
+                          height: (h / 6) + (w / 6),
+                          viewportFraction: 1,
+                          autoPlay: true,
+                          
+                          onPageChanged: ((index, reason) =>
+                              setState(() => activateIndex = index)),
+                          autoPlayInterval: Duration(seconds: 2))),
+                  Container(child: buildIndicator(), alignment: Alignment.center, padding: EdgeInsets.symmetric(vertical: 10),),
+                ]),
               ),
-              TextButton(onPressed: () {}, child: Text("See More")),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Mammals",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  TextButton(onPressed: () {}, child: Text("See More")),
+                ],
+              ),
+              SizedBox(
+                height: h / 4,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    itemBuilder("assets/lion-zoo.jpg", "lion"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/elephant.jpg", "elephant"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/monkey.jpg", "monkey"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/zebra.jpg", "zebra"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/graff.jpg", "graff"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/bear.jpg", "bear"),
+                    
+                  ],
+                ),
+              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Birds",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  TextButton(onPressed: () {}, child: Text("See More")),
+                ],
+              ),
+              SizedBox(
+                height: h / 4,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                   
+                    itemBuilder("assets/eagle.jpg", "eagle"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/owl.jpg", "owl"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/turkey.jpg", "turkey"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/sparrow.jpg", "sparrow"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/flamingo.webp", "flamingo"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/parrot.jpg", "parrot"),
+                    
+                  ],
+                ),
+              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Reptiles",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  TextButton(onPressed: () {}, child: Text("See More")),
+                ],
+              ),
+              SizedBox(
+                height: h / 4,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    
+                    itemBuilder("assets/kro.jpg", "crocodile"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/snacks.jpg", "snake"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/turtle.jpg", "turtle"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/lizard.jpg", "lizard"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/Cobra.jpg", "cobra"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    itemBuilder("assets/frog.jpg", "frog"),
+                    
+                  ],
+                ),
+              )
             ],
           ),
-          SizedBox(
-            height: 120,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/lion-zoo.jpg", "lion"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/elephant.jpg", "elephant"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/monkey.jpg", "monkey"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/zebra.jpg", "zebra"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/graff.jpg", "graff"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/bear.jpg", "bear"),
-                SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                " Birds",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              TextButton(onPressed: () {}, child: Text("See More")),
-            ],
-          ),
-          SizedBox(
-            height: 120,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/eagle.jpg", "eagle"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/owl.jpg", "owl"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/turkey.jpg", "turkey"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/sparrow.jpg", "sparrow"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/flamingo.webp", "flamingo"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/parrot.jpg", "parrot"),
-                SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
-          ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                " Reptiles",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              TextButton(onPressed: () {}, child: Text("See More")),
-            ],
-          ),
-          SizedBox(
-            height: 120,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/kro.jpg", "crocodile"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/snacks.jpg", "snake"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/turtle.jpg", "turtle"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/lizard.jpg", "lizard"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/Cobra.jpg", "cobra"),
-                SizedBox(
-                  width: 10,
-                ),
-                itemBuilder("assets/frog.jpg", "frog"),
-                SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
