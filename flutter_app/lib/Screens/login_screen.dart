@@ -27,12 +27,12 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.statusCode == 200) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setBool("isLoggedIn", true);
-        var name1 = preferences.getString("name1") ?? '';
-        var email1 = preferences.getString("email1");
+        var name = preferences.getString("name") ?? '';
+        var email = preferences.getString("email");
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => Wrapper(name: name1, email: _email, image: '',)),
+              builder: (BuildContext context) => Wrapper(name: name, email: _email, image: 'https://icons-for-free.com/download-icon-man+person+profile+user+worker+icon-1320190557331309792_512.png',)),
             );
       } else {
         errorSnackBar(context, responseMap.values.first);

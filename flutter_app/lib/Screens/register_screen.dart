@@ -35,12 +35,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (response.statusCode == 200) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setBool("isLoggedIn", true);
-        preferences.setString("name1", _name);
-        preferences.setString("email1", _email);
+        preferences.setString("name", _name);
+        preferences.setString("email", _email);
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => Wrapper(email:_email, name: _name, image: '',),
+              builder: (BuildContext context) => Wrapper(email:_email, name: _name, image: 'https://icons-for-free.com/download-icon-man+person+profile+user+worker+icon-1320190557331309792_512.png',),
             ));
       } else {
         errorSnackBar(context, responseMap.values.first[0]);
