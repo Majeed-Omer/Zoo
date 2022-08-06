@@ -35,10 +35,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (response.statusCode == 200) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setBool("isLoggedIn", true);
+        preferences.setString("name1", _name);
+        preferences.setString("email1", _email);
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => Wrapper(email: _userObj["email"], name: _userObj["name"], image: '',),
+              builder: (BuildContext context) => Wrapper(email:_email, name: _name, image: '',),
             ));
       } else {
         errorSnackBar(context, responseMap.values.first[0]);
@@ -74,7 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               children: [
                 TextField(

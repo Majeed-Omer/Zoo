@@ -30,6 +30,7 @@ class _WrapperState extends State<Wrapper> {
       body: _child,
       extendBody: true,
       bottomNavigationBar: FluidNavBar(
+        
           icons: [
             FluidNavBarIcon(
                 icon: Icons.home,

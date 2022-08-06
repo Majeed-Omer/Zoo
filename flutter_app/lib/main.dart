@@ -17,15 +17,16 @@ Future<void> main() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var status = preferences.getBool("isLoggedIn") ?? false;
 
-  String? name = preferences.getString("name");
-  String? email = preferences.getString("email");
-  String? image = preferences.getString("image");
+  var name = preferences.getString("name") ?? '';
+  var email = preferences.getString("email") ?? '';
+  var image = preferences.getString("image");
 
   final showHome = preferences.getBool('showHome') ?? false;
   
   runApp(MaterialApp(
-    home: status == true ? Wrapper(email: email!, name: name!, image: image) : showHome ? MyApp() : onBoarding(),
+    home: status == true ? Wrapper(email: email, name: name, image: image) : showHome ? MyApp() : onBoarding(),
     debugShowCheckedModeBanner: false,
+    
   ));
 }
 

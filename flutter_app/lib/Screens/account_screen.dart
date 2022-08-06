@@ -58,8 +58,6 @@ class _AccountState extends State<Account> {
                 height: 10,
               ),
               Text(widget.name, style: TextStyle(fontSize: 20),),
-              SizedBox(height: 10,),
-              Text(widget.email, style: TextStyle(fontSize: 15),),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text(
                   " My Tickets",

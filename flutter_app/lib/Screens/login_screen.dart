@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-//import 'package:flutter_session/flutter_session.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zoo/Screens/register_screen.dart';
@@ -28,10 +27,12 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.statusCode == 200) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setBool("isLoggedIn", true);
+        var name1 = preferences.getString("name1") ?? '';
+        var email1 = preferences.getString("email1");
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => Wrapper(name: '', email: _email, image: '',)),
+              builder: (BuildContext context) => Wrapper(name: name1, email: _email, image: '',)),
             );
       } else {
         errorSnackBar(context, responseMap.values.first);

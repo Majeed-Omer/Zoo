@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
               p,
               fit: BoxFit.fill,
               width: w / 2.5,
-              height: h / 5,
+              height: h / 6,
             ),
             Text(
               n,
@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
               SizedBox(
-                height: h / 4,
+                height: h / 5,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
@@ -164,7 +164,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
               SizedBox(
-                height: h / 4,
+                height: h / 5,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
@@ -208,7 +208,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
               SizedBox(
-                height: h / 4,
+                height: h / 5,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[

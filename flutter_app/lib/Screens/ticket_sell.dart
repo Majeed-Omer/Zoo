@@ -31,8 +31,6 @@ class ticket_sellState extends State<ticket_sell> {
     _getTickets();
   }
 
-
-
   _addTicket() {
     if (_nameController.text
         .trim()
@@ -196,18 +194,47 @@ class ticket_sellState extends State<ticket_sell> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        
         elevation: 0.0,
         backgroundColor: Colors.green,
         title: Text("Buy a ticket"),
-        // actions: <Widget>[
-
-        //   IconButton(
-        //     icon: Icon(Icons.refresh),
-        //     onPressed: () {
-        //       _getTickets();
-        //     },
-        //   ),
-        // ],
+        centerTitle: true,
+        actions: [
+          IconButton(icon: Icon(Icons.add), onPressed: () { 
+            showDialog(context: context, builder: (context) => AlertDialog(
+                  title: Text("Add"),
+                  content: SizedBox(
+                    height: 150,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextField(
+                          controller: _nameController,
+                decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter Name Here',
+                 ),
+                  autofocus: false,
+                 ),
+                  TextField(
+                    controller: _priceController,
+                decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter Price Here',
+                 ),
+                  autofocus: false,
+                 )
+                     
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(onPressed: (() => Navigator.pop(context)), child: Text("CANCEL")),
+                    TextButton(onPressed: (() { _addTicket(); Navigator.pop(context); }), child: Text("OK"))
+                  ],
+                ),);
+           },),
+        ],
       ),
        body: ListView.builder(itemCount: _tickets.length,
        itemBuilder: (context, index) => Card(
@@ -278,46 +305,7 @@ class ticket_sellState extends State<ticket_sell> {
             
       //     ],
       //   ),
-      
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(context: context, builder: (context) => AlertDialog(
-                  title: Text("Add"),
-                  content: SizedBox(
-                    height: 150,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        TextField(
-                          controller: _nameController,
-                decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter Name Here',
-                 ),
-                  autofocus: false,
-                 ),
-                  TextField(
-                    controller: _priceController,
-                decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter Price Here',
-                 ),
-                  autofocus: false,
-                 )
-                     
-                      ],
-                    ),
-                  ),
-                  actions: [
-                    TextButton(onPressed: (() => Navigator.pop(context)), child: Text("CANCEL")),
-                    TextButton(onPressed: (() { _addTicket(); Navigator.pop(context); }), child: Text("OK"))
-                  ],
-                ),);
-        },
-        child: Icon(Icons.add, ),
-        backgroundColor: Colors.green[500],
-      ),
+    
     );
   }
 }
