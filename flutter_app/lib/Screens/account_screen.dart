@@ -47,53 +47,54 @@ class _AccountState extends State<Account> {
           ],
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-               CircleAvatar(
-                backgroundImage: NetworkImage(widget.image),
-                radius: 50,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(widget.name, style: TextStyle(fontSize: 20),),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text(
-                  " My Tickets",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 CircleAvatar(
+                  backgroundImage: NetworkImage(widget.image),
+                  radius: 50,
                 ),
-                TextButton(onPressed: () {}, child: Text("See More")),
-              ]),
-              SizedBox(
-                height: 120,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 10,
-                    ),
-                    imageBuilder(70),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    imageBuilder(70),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    imageBuilder(70),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    imageBuilder(70),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    imageBuilder(70),
-                  ],
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-            ],
+                Text(widget.name, style: TextStyle(fontSize: 20),),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Text(
+                    "My Tickets",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  TextButton(onPressed: () {}, child: Text("See More")),
+                ]),
+                SizedBox(
+                  height: 120,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      
+                      imageBuilder(70),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      imageBuilder(70),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      imageBuilder(70),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      imageBuilder(70),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      imageBuilder(70),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ));
   }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zoo/Screens/login_screen.dart';
@@ -40,7 +41,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => Wrapper(email:_email, name: _name, image: 'https://icons-for-free.com/download-icon-man+person+profile+user+worker+icon-1320190557331309792_512.png',),
+              builder: (BuildContext context) => Wrapper(
+                email: _email,
+                name: _name,
+                image:
+                    'https://icons-for-free.com/download-icon-man+person+profile+user+worker+icon-1320190557331309792_512.png',
+              ),
             ));
       } else {
         errorSnackBar(context, responseMap.values.first[0]);
@@ -56,6 +62,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final w = MediaQuery.of(context).size.width;
     final f = MediaQuery.of(context).textScaleFactor;
 
+    googleLogin() async {
+      GoogleSignIn _googleSignIn = GoogleSignIn();
+      try {
+        var user = await _googleSignIn.signIn();
+
+        if (user == null) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text("Sign in Failed")));
+        } else {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => Wrapper(
+                    email: user.email,
+                    image: user.photoUrl,
+                    name: user.displayName!,
+                  )));
+        }
+
+        print(user);
+      } catch (error) {
+        print(error);
+      }
+    }
+
     return ScreenUtilInit(
       builder: (BuildContext context, Widget? child) => Scaffold(
         backgroundColor: Colors.white,
@@ -66,14 +95,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           title: Text(
             'Registration',
             style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           toolbarHeight: h / 12,
         ),
-
-
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -81,8 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 TextField(
                   decoration: InputDecoration(
-                      hintText: 'Name',
-                      hintStyle: TextStyle(fontSize: 15)),
+                      hintText: 'Name', hintStyle: TextStyle(fontSize: 15)),
                   onChanged: (value) {
                     _name = value;
                   },
@@ -92,8 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 TextField(
                   decoration: InputDecoration(
-                      hintText: 'Email',
-                      hintStyle: TextStyle(fontSize: 15)),
+                      hintText: 'Email', hintStyle: TextStyle(fontSize: 15)),
                   onChanged: (value) {
                     _email = value;
                   },
@@ -104,8 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextField(
                   obscureText: true,
                   decoration: InputDecoration(
-                      hintText: 'Password',
-                      hintStyle: TextStyle(fontSize: 15)),
+                      hintText: 'Password', hintStyle: TextStyle(fontSize: 15)),
                   onChanged: (value) {
                     _password = value;
                   },
@@ -143,17 +165,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               .then((userData) async {
                             setState(() async {
                               _userObj = userData;
-                              SharedPreferences preferences = await SharedPreferences.getInstance();
+                              SharedPreferences preferences =
+                                  await SharedPreferences.getInstance();
                               preferences.setBool("isLoggedIn", true);
                               preferences.setString("name", _userObj["name"]);
                               preferences.setString("email", _userObj["email"]);
-                              preferences.setString("image", _userObj["picture"]["data"]["url"]);
+                              preferences.setString(
+                                  "image", _userObj["picture"]["data"]["url"]);
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (BuildContext context) => 
-                                        Wrapper(email: _userObj["email"], name: _userObj["name"], image: _userObj["picture"]["data"]["url"]),
-                                        
+                                    builder: (BuildContext context) => Wrapper(
+                                        email: _userObj["email"],
+                                        name: _userObj["name"],
+                                        image: _userObj["picture"]["data"]
+                                            ["url"]),
                                   ));
                             });
                           });
@@ -163,9 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     InkWell(
                       child: Image.asset('assets/google_image.png',
                           width: w / 10, height: h / 10),
-                      onTap: () {
-                        print("mom");
-                      },
+                      onTap: googleLogin,
                     ),
                     InkWell(
                       child: Image.asset('assets/Instagram_image.jpg',
@@ -198,8 +222,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Text(
                     'already have an account',
                     style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        ),
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
               ],

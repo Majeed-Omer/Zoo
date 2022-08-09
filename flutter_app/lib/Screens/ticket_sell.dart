@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zoo/Services/Services_crud.dart';
 
 import '../Models/Ticket.dart';
@@ -63,7 +64,10 @@ class ticket_sellState extends State<ticket_sell> {
   _deleteTicket(Ticket ticket) {
     Services.deleteTicket(ticket.id).then((result) {
       if (result) {
-        setState(() {
+        setState(() async {
+          SharedPreferences preferences = await SharedPreferences.getInstance();
+        preferences.setString("tname", ticket.name);
+        preferences.setString("price", ticket.price);
           _tickets.remove(ticket);
         });
         _getTickets();
@@ -71,28 +75,28 @@ class ticket_sellState extends State<ticket_sell> {
     });
   }
 
-  _updateTicket(Ticket ticket) {
-    Services.updateTicket(
-        ticket.id, _nameController.text, _priceController.text)
-        .then((result) {
-      if (result) {
-        _getTickets();
-        setState(() {
-          _isUpdating = false;
-        });
-        _nameController.text = '';
-        _priceController.text = '';
-      }
-    });
-  }
+  // _updateTicket(Ticket ticket) {
+  //   Services.updateTicket(
+  //       ticket.id, _nameController.text, _priceController.text)
+  //       .then((result) {
+  //     if (result) {
+  //       _getTickets();
+  //       setState(() {
+  //         _isUpdating = false;
+  //       });
+  //       _nameController.text = '';
+  //       _priceController.text = '';
+  //     }
+  //   });
+  // }
 
-  _setValues(Ticket ticket) {
-    _nameController.text = ticket.name;
-    _priceController.text = ticket.price;
-    setState(() {
-      _isUpdating = true;
-    });
-  }
+  // _setValues(Ticket ticket) {
+  //   _nameController.text = ticket.name;
+  //   _priceController.text = ticket.price;
+  //   setState(() {
+  //     _isUpdating = true;
+  //   });
+  // }
 
   _clearValues() {
     _nameController.text = '';
@@ -202,7 +206,7 @@ class ticket_sellState extends State<ticket_sell> {
         actions: [
           IconButton(icon: Icon(Icons.add), onPressed: () { 
             showDialog(context: context, builder: (context) => AlertDialog(
-                  title: Text("Add"),
+                  title: Text("Add Ticket"),
                   content: SizedBox(
                     height: 150,
                     child: Column(
@@ -249,7 +253,7 @@ class ticket_sellState extends State<ticket_sell> {
                       subtitle: Text(_tickets[index].price),
                       trailing: TextButton(
                         onPressed: () {
-                          _tickets.remove(_tickets[index].id);
+                          _deleteTicket(_tickets[index]);
                         },
                         child: Text("Buy"),
                       ),

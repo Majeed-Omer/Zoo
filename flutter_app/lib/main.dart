@@ -8,7 +8,13 @@ import 'package:native_notify/native_notify.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(name: "zoo", options: FirebaseOptions(apiKey: '123', appId: '111', messagingSenderId: '333', projectId: '444'));
+  await Firebase.initializeApp(
+      name: "zoo",
+      options: FirebaseOptions(
+          apiKey: '123',
+          appId: '111',
+          messagingSenderId: '333',
+          projectId: '444'));
   NativeNotify.initialize(
       1220,
       '1Exwx7C8rNyFewTJYYbx06',
@@ -22,22 +28,23 @@ Future<void> main() async {
   var image = preferences.getString("image");
 
   final showHome = preferences.getBool('showHome') ?? false;
-  
+
   runApp(MaterialApp(
-    home: status == true ? Wrapper(email: email, name: name, image: image) : showHome ? MyApp() : onBoarding(),
+    home: status == true
+        ? Wrapper(email: email, name: name, image: image)
+        : showHome
+            ? MyApp()
+            : onBoarding(),
     debugShowCheckedModeBanner: false,
-    
   ));
 }
 
-class MyApp extends StatefulWidget {  
-
+class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -29,33 +29,35 @@ class _WrapperState extends State<Wrapper> {
     return Scaffold(
       body: _child,
       extendBody: true,
-      bottomNavigationBar: FluidNavBar(
-        
-          icons: [
-            FluidNavBarIcon(
-                icon: Icons.home,
-                backgroundColor: Colors.pink,
-                extras: {"label": "home"}),
-            FluidNavBarIcon(
-                icon: CupertinoIcons.ticket,
-                backgroundColor: Colors.pink,
-                extras: {"label": "ticket"}),
-            FluidNavBarIcon(
-                icon: Icons.account_circle,
-                backgroundColor: Colors.pink,
-                extras: {"label": "account"}),
-          ],
-          onChange: _handleNavigationChange,
-          style: FluidNavBarStyle(
-            iconSelectedForegroundColor: Colors.white,
-              iconUnselectedForegroundColor: Colors.white60, barBackgroundColor: Colors.green),
-          scaleFactor: 1.5,
-          defaultIndex: 0,
-          itemBuilder: (icon, item) => Semantics(
-            label: icon.extras!["label"],
-            child: item,
+      bottomNavigationBar: SizedBox(
+        width: double.infinity,
+        child: FluidNavBar(
+            icons: [
+              FluidNavBarIcon(
+                  icon: Icons.home,
+                  backgroundColor: Colors.pink,
+                  extras: {"label": "home"}),
+              FluidNavBarIcon(
+                  icon: CupertinoIcons.ticket,
+                  backgroundColor: Colors.pink,
+                  extras: {"label": "ticket"}),
+              FluidNavBarIcon(
+                  icon: Icons.account_circle,
+                  backgroundColor: Colors.pink,
+                  extras: {"label": "account"}),
+            ],
+            onChange: _handleNavigationChange,
+            style: FluidNavBarStyle(
+              iconSelectedForegroundColor: Colors.white,
+                iconUnselectedForegroundColor: Colors.white60, barBackgroundColor: Colors.green),
+            scaleFactor: 1.5,
+            defaultIndex: 0,
+            itemBuilder: (icon, item) => Semantics(
+              label: icon.extras!["label"],
+              child: item,
+            ),
           ),
-        ),
+      ),
     );
   }
 
