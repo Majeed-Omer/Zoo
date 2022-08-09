@@ -23,10 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed83c02a-7600-49f8-851c-6b40bfe00497" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/flutter_app/lib/Screens/account_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/lib/Screens/account_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_app/lib/Screens/ticket_sell.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/lib/Screens/ticket_sell.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_app/lib/widgets/wrapper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/lib/widgets/wrapper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
