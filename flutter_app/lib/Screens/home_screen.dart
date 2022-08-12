@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:zoo/Screens/allAnimals_scrren.dart';
 
 import 'animals_details.dart';
 
@@ -45,7 +46,7 @@ class _HomeState extends State<Home> {
             ),
             Text(
               n,
-              style: TextStyle(fontSize: h/35, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: h/40 , fontWeight: FontWeight.bold),
             ),
           ]),
         ),
@@ -84,6 +85,7 @@ class _HomeState extends State<Home> {
         title: Text("Home"),
         centerTitle: true,
         elevation: 0.0,
+        leading: CircleAvatar(backgroundImage: AssetImage('assets/logo.jpg'),),
       ),
       body: ListView(
         children:[ Padding(
@@ -117,7 +119,11 @@ class _HomeState extends State<Home> {
                     "Mammals",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  TextButton(onPressed: () {}, child: Text("See All")),
+                  TextButton(onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return All_animals();
+        }));
+                  }, child: Text("See All")),
                 ],
               ),
               SizedBox(
@@ -160,7 +166,11 @@ class _HomeState extends State<Home> {
                     "Birds",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  TextButton(onPressed: () {}, child: Text("See All")),
+                  TextButton(onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return All_animals();
+        }));
+                  }, child: Text("See All")),
                 ],
               ),
               SizedBox(
@@ -204,7 +214,11 @@ class _HomeState extends State<Home> {
                     "Reptiles",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  TextButton(onPressed: () {}, child: Text("See All")),
+                  TextButton(onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return All_animals();
+        }));
+                  }, child: Text("See All")),
                 ],
               ),
               SizedBox(

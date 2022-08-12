@@ -54,106 +54,105 @@ class _AccountState extends State<Account> {
             )
           ],
         ),
-        body: ListView(
-          children:[ Padding(
+        body: ListView(children: [
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(widget.image),
-                    radius: 50,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    widget.name,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "My Tickets",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        TextButton(onPressed: () {}, child: Text("See All")),
-                      ]),
-                  SizedBox(
-                    height: 120,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        imageBuilder(70),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        imageBuilder(70),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        imageBuilder(70),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        imageBuilder(70),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        imageBuilder(70),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Text(
-                      "Reach us",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    alignment: Alignment.bottomLeft,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: NetworkImage(widget.image == null
+                      ? 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg'
+                      : widget.image),
+                  radius: 50,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  widget.name,
+                  style: TextStyle(fontSize: 20),
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                        onPressed: () => share(SocialMedia.facebook),
-                        icon: FaIcon(FontAwesomeIcons.facebookSquare,
-                            size: h / 23, color: Colors.blue),
+                      Text(
+                        "My Tickets",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
-                      IconButton(
-                          onPressed: () => share(SocialMedia.instagram),
-                          icon: FaIcon(
-                            FontAwesomeIcons.instagramSquare,
-                            size: h / 23,
-                            color: Colors.redAccent,
-                          )),
-                      IconButton(
-                          onPressed: () => share(SocialMedia.linkedin),
-                          icon: FaIcon(
-                            FontAwesomeIcons.linkedin,
-                            size: h / 23,
-                            color: Color.fromARGB(255, 7, 69, 120),
-                          )),
-                      IconButton(
-                          onPressed: () => share(SocialMedia.whatsapp),
-                          icon: FaIcon(
-                            FontAwesomeIcons.whatsappSquare,
-                            size: h / 23,
-                            color: Colors.lightGreenAccent,
-                          )),
+                      TextButton(onPressed: () {}, child: Text("See All")),
+                    ]),
+                SizedBox(
+                  height: h / 7,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      imageBuilder(70),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      imageBuilder(70),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      imageBuilder(70),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      imageBuilder(70),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      imageBuilder(70),
                     ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  child: Text(
+                    "Reach us",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  alignment: Alignment.bottomLeft,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconButton(
+                      onPressed: () => share(SocialMedia.facebook),
+                      icon: FaIcon(FontAwesomeIcons.facebookSquare,
+                          size: h / 23, color: Colors.blue),
+                    ),
+                    IconButton(
+                        onPressed: () => share(SocialMedia.instagram),
+                        icon: FaIcon(
+                          FontAwesomeIcons.instagramSquare,
+                          size: h / 23,
+                          color: Colors.redAccent,
+                        )),
+                    IconButton(
+                        onPressed: () => share(SocialMedia.linkedin),
+                        icon: FaIcon(
+                          FontAwesomeIcons.linkedin,
+                          size: h / 23,
+                          color: Color.fromARGB(255, 7, 69, 120),
+                        )),
+                    IconButton(
+                        onPressed: () => share(SocialMedia.whatsapp),
+                        icon: FaIcon(
+                          FontAwesomeIcons.whatsappSquare,
+                          size: h / 23,
+                          color: Colors.lightGreenAccent,
+                        )),
+                  ],
+                ),
+              ],
             ),
-          ),]
-        ));
+          ),
+        ]));
   }
 
   Future share(SocialMedia socialMedia) async {
