@@ -63,6 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final f = MediaQuery.of(context).textScaleFactor;
 
     googleLogin() async {
+      print("mom");
       GoogleSignIn _googleSignIn = GoogleSignIn();
       try {
         var user = await _googleSignIn.signIn();
@@ -189,7 +190,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     InkWell(
                       child: Image.asset('assets/google_image.png',
                           width: w / 10, height: h / 10),
-                      onTap: googleLogin,
+                      onTap: (){googleLogin();},
                     ),
                     InkWell(
                       child: Image.asset('assets/Instagram_image.jpg',

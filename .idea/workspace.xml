@@ -24,6 +24,16 @@
   <component name="ChangeListManager">
     <list default="true" id="ed83c02a-7600-49f8-851c-6b40bfe00497" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/android/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/android/app/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/lib/Screens/account_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/lib/Screens/account_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/lib/Screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/lib/Screens/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/lib/Screens/register_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/lib/Screens/register_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_app/pubspec.yaml" afterDir="false" />
     </list>

@@ -18,7 +18,7 @@ Future<void> main() async {
   NativeNotify.initialize(
       1220,
       '1Exwx7C8rNyFewTJYYbx06',
-      'AAAADvD_G9Y:APA91bHT0SJ8_dDFgSX_3VpTxmSkfLXLLPKIFOuPn6nyOsZArSiqKj4GCwbDocN1y9X_3vtrHrbjGC4x2Ncr5fxDiO_K0kpy8f9xY1zZ0WnauuqkdGVvKB_GkOt61xGAJWbDAD-8BDZ6',
+      'AAAAhkJ5fis:APA91bGX0HCJIcUMYI_LlWtw0CcXR1WgX3Vt-C1SgUdED0XowQYhlP6Ki92mgwiRL_g6KV-Olg3-cDTw0r-cfHY9AmtReSifN0q1hEHYjIJPyP3SrvExsNU-V0aLpprrmpkkiRwyBGB1',
       null);
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var status = preferences.getBool("isLoggedIn") ?? false;

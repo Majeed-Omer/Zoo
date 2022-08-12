@@ -41,11 +41,11 @@ class _HomeState extends State<Home> {
               p,
               fit: BoxFit.fill,
               width: w / 2.5,
-              height: h / 6,
+              height: h / 6.3,
             ),
             Text(
               n,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: h/35, fontWeight: FontWeight.bold),
             ),
           ]),
         ),
@@ -85,8 +85,8 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
+      body: ListView(
+        children:[ Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             children: [
@@ -117,7 +117,7 @@ class _HomeState extends State<Home> {
                     "Mammals",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  TextButton(onPressed: () {}, child: Text("See More")),
+                  TextButton(onPressed: () {}, child: Text("See All")),
                 ],
               ),
               SizedBox(
@@ -160,7 +160,7 @@ class _HomeState extends State<Home> {
                     "Birds",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  TextButton(onPressed: () {}, child: Text("See More")),
+                  TextButton(onPressed: () {}, child: Text("See All")),
                 ],
               ),
               SizedBox(
@@ -204,7 +204,7 @@ class _HomeState extends State<Home> {
                     "Reptiles",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  TextButton(onPressed: () {}, child: Text("See More")),
+                  TextButton(onPressed: () {}, child: Text("See All")),
                 ],
               ),
               SizedBox(
@@ -237,10 +237,10 @@ class _HomeState extends State<Home> {
                     
                   ],
                 ),
-              )
+              ),
             ],
           ),
-        ),
+        ),]
       ),
     );
   }
