@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "576640876075",
-    "project_id": "zoo-flutter",
-    "storage_bucket": "zoo-flutter.appspot.com"
+    "project_number": "364662540815",
+    "project_id": "zoo-project-49975",
+    "storage_bucket": "zoo-project-49975.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:576640876075:android:7416c1147d8bc54035b46e",
+        "mobilesdk_app_id": "1:364662540815:android:11378dd7dd51ca1108717a",
         "android_client_info": {
           "package_name": "com.example.zoo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "576640876075-6d1ck87qo7mc7dfrkagpir8fjhjv29j6.apps.googleusercontent.com",
+          "client_id": "364662540815-6v2h27jlfciaa05drg91lq8031pq0ral.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDmFyS88ApTeG41TK8S0g8hcRjtMT4ktBc"
+          "current_key": "AIzaSyDC1qw_dIHa8UeuCFBwpam7CVPK42SJSyA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "576640876075-6d1ck87qo7mc7dfrkagpir8fjhjv29j6.apps.googleusercontent.com",
+              "client_id": "364662540815-6v2h27jlfciaa05drg91lq8031pq0ral.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
