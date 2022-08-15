@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zoo/Screens/login_screen.dart';
 import 'package:zoo/Services/auth_services.dart';
 import 'package:zoo/Services/globals.dart';
-import 'package:zoo/widgets/rounded_button.dart';
-import 'package:zoo/widgets/wrapper.dart';
+import 'package:zoo/Widgets/rounded_button.dart';
+import 'package:zoo/Widgets/wrapper.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);

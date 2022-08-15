@@ -1,26 +1,24 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zoo/Screens/allAnimals_scrren.dart';
 import 'package:zoo/Screens/onBoarding_screen.dart';
 import 'package:zoo/Screens/register_screen.dart';
-import 'package:zoo/widgets/wrapper.dart';
-import 'package:native_notify/native_notify.dart';
+import 'package:zoo/Services/local_notifications.dart';
+import 'package:zoo/Widgets/wrapper.dart';
+
+Future<void> backroundHandler(RemoteMessage message) async {
+  print(" This is message from background");
+  print(message.notification!.title);
+  print(message.notification!.body);
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      name: "zoo",
-      options: FirebaseOptions(
-          apiKey: '123',
-          appId: '111',
-          messagingSenderId: '333',
-          projectId: '444'));
-  NativeNotify.initialize(
-      1220,
-      '1Exwx7C8rNyFewTJYYbx06',
-      'AAAAVOeUyg8:APA91bHd4TMY-ySexcDP8345MsSLUyBIOkxyr57Rsb7XwB9Y9urIex_Qbuf2i8Gduz3x3rkUSPcuR4W2KkARbyLNYP5SUfyK-6oZizVNJu--XSa4ukPdUbQf_3Pb7E9EdPX7lW28bA7d',
-      null);
+  await Firebase.initializeApp();
+  await FirebaseMessaging.instance.getToken();
+  FirebaseMessaging.onBackgroundMessage(backroundHandler);
+
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var status = preferences.getBool("isLoggedIn") ?? false;
 
@@ -36,6 +34,7 @@ Future<void> main() async {
         : showHome
             ? MyApp()
             : onBoarding(),
+    // home: MyApp(),
     debugShowCheckedModeBanner: false,
   ));
 }
@@ -46,11 +45,47 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String notificationMsg = "Waiting for notifications";
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    LocalNotificationService.initilize();
+
+    //Terminated State
+    FirebaseMessaging.instance.getInitialMessage().then((event) {
+      if (event != null) {
+        setState(() {
+          notificationMsg =
+              "${event.notification!.title} ${event.notification!.body} I am coming from terminated state";
+        });
+      }
+    });
+
+    // Foregrand State
+    FirebaseMessaging.onMessage.listen((event) {
+      LocalNotificationService.showNotificationOnForeground(event);
+      setState(() {
+        notificationMsg =
+            "${event.notification!.title} ${event.notification!.body} I am coming from foreground";
+      });
+    });
+
+    // background State
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      setState(() {
+        notificationMsg =
+            "${event.notification!.title} ${event.notification!.body} I am coming from background";
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RegisterScreen(),
+       home: RegisterScreen(),
     );
   }
 }
+
