@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zoo/Services/Services_crud.dart';
-
 import '../Models/Ticket.dart';
 
 class ticket_sell extends StatefulWidget {
@@ -33,12 +32,8 @@ class ticket_sellState extends State<ticket_sell> {
   }
 
   _addTicket() {
-    if (_nameController.text
-        .trim()
-        .isEmpty ||
-        _priceController.text
-            .trim()
-            .isEmpty) {
+    if (_nameController.text.trim().isEmpty ||
+        _priceController.text.trim().isEmpty) {
       print("Empty fields");
       return;
     }
@@ -66,8 +61,8 @@ class ticket_sellState extends State<ticket_sell> {
       if (result) {
         setState(() async {
           SharedPreferences preferences = await SharedPreferences.getInstance();
-        preferences.setString("tname", ticket.name);
-        preferences.setString("price", ticket.price);
+          preferences.setString("tname", ticket.name);
+          preferences.setString("price", ticket.price);
           _tickets.remove(ticket);
         });
         _getTickets();
@@ -103,90 +98,6 @@ class ticket_sellState extends State<ticket_sell> {
     _priceController.text = '';
   }
 
-  // SingleChildScrollView _dataBody() {
-  //   return SingleChildScrollView(
-  //     scrollDirection: Axis.vertical,
-  //     child: SingleChildScrollView(
-  //       scrollDirection: Axis.horizontal,
-  //       child: DataTable(
-  //         dataTextStyle: TextStyle(color: Colors.white),
-  //         headingRowColor: MaterialStateColor.resolveWith((states) => Colors.teal),
-  //         dataRowColor: MaterialStateColor.resolveWith((Set<MaterialState> states) => states.contains(MaterialState.selected)
-  //             ? Colors.white
-  //             : Colors.black
-  //         ),
-  //         columns: [
-  //           DataColumn(
-  //               label: Text("ID"),
-  //               numeric: false,
-  //               tooltip: "This is the employee id"),
-  //           DataColumn(
-  //               label: Text(
-  //                 "NAME",
-  //               ),
-  //               numeric: false,
-  //               tooltip: "This is the name"),
-  //           DataColumn(
-  //               label: Text("PRICE"),
-  //               numeric: false,
-  //               tooltip: "This is the price"),
-  //           DataColumn(
-  //               label: Text("DELETE"),
-  //               numeric: false,
-  //               tooltip: "Delete Action"),
-  //         ],
-  //         rows: _tickets.map(
-  //               (ticket) =>
-  //               DataRow(
-  //                 cells: [
-  //                   DataCell(
-  //                     Text(ticket.id),
-  //                     onTap: () {
-  //                       print("Tapped " + ticket.name);
-  //                       _setValues(ticket);
-  //                       _selectedTicket = ticket;
-  //                     },
-  //                   ),
-  //                   DataCell(
-  //                     Text(
-  //                       ticket.name.toUpperCase(),
-  //                     ),
-  //                     onTap: () {
-  //                       print("Tapped " + ticket.name);
-  //                       _setValues(ticket);
-  //                       _selectedTicket = ticket;
-  //                     },
-  //                   ),
-  //                   DataCell(
-  //                     Text(
-  //                       ticket.price.toUpperCase(),
-  //                     ),
-  //                     onTap: () {
-  //                       print("Tapped " + ticket.name);
-  //                       _setValues(ticket);
-  //                       _selectedTicket = ticket;
-  //                     },
-  //                   ),
-  //                   DataCell(
-  //                     IconButton(
-  //                       icon: Icon(Icons.delete,color: Colors.redAccent,),
-  //                       onPressed: () {
-  //                         _deleteTicket(ticket);
-  //                       },
-  //                     ),
-  //                     onTap: () {
-  //                       print("Tapped " + ticket.name);
-  //                     },
-  //                   ),
-  //                 ],
-  //               ),
-  //         )
-  //             .toList(),
-  //       ),
-  //     ),
-  //   );
-  // }
-
   // showSnackBar(context, message) {
   //   _scaffoldKey.currentState!.showSnackBar(SnackBar(
   //     content: Text(message),
@@ -198,14 +109,17 @@ class ticket_sellState extends State<ticket_sell> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        
         elevation: 0.0,
         backgroundColor: Colors.green,
         title: Text("Buy a ticket"),
         centerTitle: true,
         actions: [
-          IconButton(icon: Icon(Icons.add), onPressed: () { 
-            showDialog(context: context, builder: (context) => AlertDialog(
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
                   title: Text("Add Ticket"),
                   content: SizedBox(
                     height: 150,
@@ -214,102 +128,60 @@ class ticket_sellState extends State<ticket_sell> {
                       children: [
                         TextField(
                           controller: _nameController,
-                decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter Name Here',
-                 ),
-                  autofocus: false,
-                 ),
-                  TextField(
-                    controller: _priceController,
-                decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter Price Here',
-                 ),
-                  autofocus: false,
-                 )
-                     
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Enter Name Here',
+                          ),
+                          autofocus: false,
+                        ),
+                        TextField(
+                          controller: _priceController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Enter Price Here',
+                          ),
+                          autofocus: false,
+                        )
                       ],
                     ),
                   ),
                   actions: [
-                    TextButton(onPressed: (() => Navigator.pop(context)), child: Text("CANCEL")),
-                    TextButton(onPressed: (() { _addTicket(); Navigator.pop(context); }), child: Text("OK"))
+                    TextButton(
+                        onPressed: (() => Navigator.pop(context)),
+                        child: Text("CANCEL")),
+                    TextButton(
+                        onPressed: (() {
+                          _addTicket();
+                          Navigator.pop(context);
+                        }),
+                        child: Text("OK"))
                   ],
-                ),);
-           },),
+                ),
+              );
+            },
+          ),
         ],
       ),
-       body: ListView.builder(itemCount: _tickets.length,
-       itemBuilder: (context, index) => Card(
-                    margin: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 0.0),
-                    child: ListTile(
-                      leading: Image.asset('assets/regular.png'),
-                      title: Text(
-                        _tickets[index].name,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      subtitle: Text(_tickets[index].price),
-                      trailing: TextButton(
-                        onPressed: () {
-                          _deleteTicket(_tickets[index]);
-                        },
-                        child: Text("Buy"),
-                      ),
-                    ),
-                  ),
-       
-       ),
-      //     Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: <Widget>[
-      //       // Padding(
-      //       //   padding: EdgeInsets.all(20.0),
-      //       //   child: TextField(
-      //       //     controller: _nameController,
-      //       //     decoration: InputDecoration.collapsed(
-      //       //       hintText: "First Name",
-      //       //     ),
-      //       //   ),
-      //       // ),
-      //       // Padding(
-      //       //   padding: EdgeInsets.all(20.0),
-      //       //   child: TextField(
-      //       //     controller: _priceController,
-      //       //     decoration: InputDecoration.collapsed(
-      //       //       hintText: "Last Name",
-      //       //     ),
-      //       //   ),
-      //       // ),
-      //       // _isUpdating
-      //       //     ? Row(
-      //       //   children: <Widget>[
-      //       //     ElevatedButton(
-      //       //       child: Text('UPDATE'),
-      //       //       onPressed: () {
-      //       //         _updateTicket(_selectedTicket);
-      //       //       },
-      //       //     ),
-      //       //     ElevatedButton(
-      //       //       child: Text('CANCEL'),
-      //       //       onPressed: () {
-      //       //         setState(() {
-      //       //           _isUpdating = false;
-      //       //         });
-      //       //         _clearValues();
-      //       //       },
-      //       //     ),
-      //       //   ],
-      //       // )
-      //       //     : Container(),
-      //       // Expanded(
-      //       //   child: _dataBody(),
-      //       // )
-            
-      //     ],
-      //   ),
-    
+      body: ListView.builder(
+        itemCount: _tickets.length,
+        itemBuilder: (context, index) => Card(
+          margin: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 0.0),
+          child: ListTile(
+            leading: Image.asset('assets/regular.png'),
+            title: Text(
+              _tickets[index].name,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            subtitle: Text(_tickets[index].price),
+            trailing: TextButton(
+              onPressed: () {
+                _deleteTicket(_tickets[index]);
+              },
+              child: Text("Buy"),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
